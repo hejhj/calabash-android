@@ -1,4 +1,4 @@
-package com.jayway.android.robotium.solo;
+package com.robotium.solo;
 
 import android.app.Activity;
 import android.app.Instrumentation;
