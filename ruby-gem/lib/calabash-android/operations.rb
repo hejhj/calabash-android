@@ -24,6 +24,14 @@ module Operations
   def current_activity
     `#{default_device.adb_command} shell dumpsys window windows`.each_line.grep(/mFocusedApp.+[\.\/]([^.\/\}]+)\}/){$1}.first
   end
+  
+  #pixels
+  def screen_size
+      screen = `#{default_device.adb_command} shell dumpsys window`.each_line.grep(/mUnrestrictedScree/)[0].match(/(\d*)x(\d*)/)
+      width = screen[1]
+      height = screen[2]
+      return [width,height]
+  end
 
   def log(message)
     $stdout.puts "#{Time.now.strftime("%Y-%m-%d %H:%M:%S")} - #{message}" if (ARGV.include? "-v" or ARGV.include? "--verbose")
